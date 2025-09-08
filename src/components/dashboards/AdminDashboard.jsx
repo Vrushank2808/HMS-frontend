@@ -11,6 +11,7 @@ import { StatCard } from '../ui/Card';
 import { LoadingSpinner } from '../ui/Loading';
 import { useNotification } from '../../context/NotificationContext';
 import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../../config/env';
 
 const AdminDashboard = () => {
     const [stats, setStats] = useState({});
@@ -31,7 +32,7 @@ const AdminDashboard = () => {
                 return;
             }
 
-            const response = await axios.get('https://hms-backend-production-9545.up.railway.app/admin/dashboard', {
+            const response = await axios.get(getApiUrl('/admin/dashboard'), {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -124,56 +125,6 @@ const AdminDashboard = () => {
                 />
             </div>
 
-            {/* Main Content */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-                <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
-                    <div className="flex items-center">
-                        <div className="p-2 sm:p-3 rounded-full bg-blue-100 text-blue-600">
-                            <span className="text-xl sm:text-2xl">👥</span>
-                        </div>
-                        <div className="ml-3 sm:ml-4">
-                            <p className="text-xs sm:text-sm font-medium text-gray-600">Total Students</p>
-                            <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.totalStudents || 0}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
-                    <div className="flex items-center">
-                        <div className="p-2 sm:p-3 rounded-full bg-green-100 text-green-600">
-                            <span className="text-xl sm:text-2xl">🏠</span>
-                        </div>
-                        <div className="ml-3 sm:ml-4">
-                            <p className="text-xs sm:text-sm font-medium text-gray-600">Total Rooms</p>
-                            <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.totalRooms || 0}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
-                    <div className="flex items-center">
-                        <div className="p-2 sm:p-3 rounded-full bg-yellow-100 text-yellow-600">
-                            <span className="text-xl sm:text-2xl">📝</span>
-                        </div>
-                        <div className="ml-3 sm:ml-4">
-                            <p className="text-xs sm:text-sm font-medium text-gray-600">Pending Complaints</p>
-                            <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.pendingComplaints || 0}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
-                    <div className="flex items-center">
-                        <div className="p-2 sm:p-3 rounded-full bg-purple-100 text-purple-600">
-                            <span className="text-xl sm:text-2xl">🚪</span>
-                        </div>
-                        <div className="ml-3 sm:ml-4">
-                            <p className="text-xs sm:text-sm font-medium text-gray-600">Active Visitors</p>
-                            <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.activeVisitors || 0}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 <div className="bg-white p-4 sm:p-6 rounded-lg shadow">

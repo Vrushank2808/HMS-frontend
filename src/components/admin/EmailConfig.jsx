@@ -12,6 +12,7 @@ import {
 import axios from 'axios';
 import { useNotification } from '../../context/NotificationContext';
 import { LoadingSpinner } from '../ui/Loading';
+import { getApiUrl } from '../../config/env';
 
 const EmailConfig = () => {
     const [config, setConfig] = useState(null);
@@ -31,7 +32,7 @@ const EmailConfig = () => {
 
     const checkEmailConfig = async () => {
         try {
-            const response = await axios.get('https://hms-backend-production-9545.up.railway.app/test-email/check-config');
+            const response = await axios.get(getApiUrl('/test-email/check-config'));
             setConfig(response.data);
         } catch (error) {
             console.error('Error checking email config:', error);
@@ -53,7 +54,7 @@ const EmailConfig = () => {
                 ...(testForm.type === 'credentials' && { role: testForm.role })
             };
 
-            const response = await axios.post(`https://hms-backend-production-9545.up.railway.app${endpoint}`, payload);
+            const response = await axios.post(getApiUrl(endpoint), payload);
             showInfo(response.data.message, 'success');
         } catch (error) {
             showInfo(error.response?.data?.message || 'Failed to send test email', 'error');

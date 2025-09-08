@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/useAuth';
 import { useLocation } from 'react-router-dom';
+import { getApiUrl } from '../../config/env';
 
 const StudentDashboard = () => {
     const { user } = useAuth();
@@ -41,7 +42,7 @@ const StudentDashboard = () => {
     const fetchProfile = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('https://hms-backend-production-9545.up.railway.app/student/profile', {
+            const response = await axios.get(getApiUrl('/student/profile'), {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setProfile(response.data.student);
@@ -53,7 +54,7 @@ const StudentDashboard = () => {
     const fetchComplaints = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('https://hms-backend-production-9545.up.railway.app/student/complaints', {
+            const response = await axios.get(getApiUrl('/student/complaints'), {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setComplaints(response.data.complaints);
@@ -65,7 +66,7 @@ const StudentDashboard = () => {
     const fetchVisitors = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('https://hms-backend-production-9545.up.railway.app/student/visitors', {
+            const response = await axios.get(getApiUrl('/student/visitors'), {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setVisitors(response.data.visitors);
@@ -79,7 +80,7 @@ const StudentDashboard = () => {
     const fetchFees = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('https://hms-backend-production-9545.up.railway.app/student/fees', {
+            const response = await axios.get(getApiUrl('/student/fees'), {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setFees(response.data.fees);
@@ -108,7 +109,7 @@ const StudentDashboard = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('https://hms-backend-production-9545.up.railway.app/student/fees/pay', paymentForm, {
+            const response = await axios.post(getApiUrl('/student/fees/pay'), paymentForm, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setShowPaymentForm(false);
@@ -130,7 +131,7 @@ const StudentDashboard = () => {
     const handleComplaintSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://hms-backend-production-9545.up.railway.app/student/complaints', complaintForm);
+            await axios.post(getApiUrl('/student/complaints'), complaintForm);
             setShowComplaintForm(false);
             setComplaintForm({
                 title: '',

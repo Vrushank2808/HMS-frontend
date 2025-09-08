@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AuthContext } from './AuthContextCore';
 import axios from 'axios';
+import { getApiUrl } from '../config/env';
 
 // context moved to AuthContextCore.js to satisfy fast-refresh constraints
 
@@ -38,10 +39,10 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password, role) => {
         try {
             const response = await axios.post(
-                `https://hms-backend-production-9545.up.railway.app/auth/login`,
+                getApiUrl('/auth/login'),
                 { email, password, role }
-              );
-              
+            );
+
 
             const { token } = response.data;
             const userData = response.data[role] || response.data.admin || response.data.student || response.data.warden || response.data.security;

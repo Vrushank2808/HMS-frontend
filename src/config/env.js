@@ -45,7 +45,9 @@ export const config = {
 
 // Helper function to get full API URL
 export const getApiUrl = (endpoint) => {
-    return `${config.API_URL}${endpoint}`;
+    const base = (config.API_URL || '').replace(/\/+$/, '');
+    const path = (endpoint || '').replace(/^\/+/, '');
+    return `${base}/${path}`;
 };
 
 // Helper function to check if we're in development

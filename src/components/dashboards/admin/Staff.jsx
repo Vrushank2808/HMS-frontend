@@ -20,7 +20,7 @@ const AdminStaff = () => {
         const fetchStaff = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get('getApiUrl(' / admin / staff', {
+                const res = await axios.get(getApiUrl('/admin/staff'), {
                     headers: { Authorization: `Bearer ${token}` }
                 });
     const wardenData = res.data.wardens || [];
@@ -89,7 +89,7 @@ if (loading) {
 
 const submit = async (type) => {
     try {
-        const endpoint = type === 'warden' ? 'getApiUrl(' / warden / register' : 'getApiUrl('/security/register';
+        const endpoint = type === 'warden' ? getApiUrl('/warden/register') : getApiUrl('/security/register');
         await axios.post(endpoint, form);
         setForm({ fullName: '', email: '', phone: '', password: '' });
         setShowWardenForm(false);
@@ -97,7 +97,7 @@ const submit = async (type) => {
         // refresh
         setLoading(true);
         const token = localStorage.getItem('token');
-        const res = await axios.get('getApiUrl(' / admin / staff', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get(getApiUrl('/admin/staff'), { headers: { Authorization: `Bearer ${token}` } });
             const wardenData = res.data.wardens || [];
         const securityData = res.data.securities || [];
         setWardens(wardenData);

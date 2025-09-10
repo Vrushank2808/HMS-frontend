@@ -28,7 +28,7 @@ const SecurityDashboard = () => {
 
     const fetchVisitors = async () => {
         try {
-            const response = await axios.get('getApiUrl(' / security / visitors');
+            const response = await axios.get(getApiUrl('/security/visitors'));
             setVisitors(response.data.visitors);
         } catch (error) {
             console.error('Error fetching visitors:', error);
@@ -54,7 +54,7 @@ const SecurityDashboard = () => {
     const handleCheckIn = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('getApiUrl(' / security / visitors / checkin', checkInForm);
+            await axios.post(getApiUrl('/security/visitors/checkin'), checkInForm);
             setShowCheckInForm(false);
             setCheckInForm({
                 visitorName: '',

@@ -44,7 +44,7 @@ const AdminManagement = () => {
     const fetchAdmins = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('getApiUrl(' / admin / admins', {
+            const response = await axios.get(getApiUrl('/admin/admins'), {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
         setAdmins(response.data.admins || response.data || []);
@@ -62,7 +62,7 @@ const handleAddAdmin = async (e) => {
 
     try {
         const token = localStorage.getItem('token');
-        const response = await axios.post('getApiUrl(' / admin / admins', {
+        const response = await axios.post(getApiUrl('/admin/admins'), {
                 ...formData,
             joinDate: formData.joinDate || new Date().toISOString().split('T')[0]
             }, {

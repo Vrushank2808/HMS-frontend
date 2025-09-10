@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { getApiUrl } from '../../../config/env';
 
 const AdminStudents = () => {
     const [students, setStudents] = useState([]);
@@ -22,10 +23,10 @@ const AdminStudents = () => {
             try {
                 const token = localStorage.getItem('token');
                 const [studentsRes, roomsRes] = await Promise.all([
-                    axios.get('https://hms-backend-production-9545.up.railway.app/warden/students', {
+                    axios.get(getApiUrl('/warden/students'), {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('https://hms-backend-production-9545.up.railway.app/warden/rooms', {
+                    axios.get(getApiUrl('/warden/rooms'), {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                 ]);

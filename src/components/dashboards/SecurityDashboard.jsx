@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getApiUrl } from '../../config/env';
 import { useLocation } from 'react-router-dom';
 
 const SecurityDashboard = () => {
@@ -27,7 +28,7 @@ const SecurityDashboard = () => {
 
     const fetchVisitors = async () => {
         try {
-            const response = await axios.get('https://hms-backend-production-9545.up.railway.app/security/visitors');
+            const response = await axios.get('getApiUrl(' / security / visitors');
             setVisitors(response.data.visitors);
         } catch (error) {
             console.error('Error fetching visitors:', error);
@@ -43,7 +44,7 @@ const SecurityDashboard = () => {
         }
 
         try {
-            const response = await axios.get(`https://hms-backend-production-9545.up.railway.app/security/students/search?query=${query}`);
+            const response = await axios.get(`getApiUrl('/security/students/search?query=${query}`);
             setStudents(response.data.students);
         } catch (error) {
             console.error('Error searching students:', error);
@@ -53,7 +54,7 @@ const SecurityDashboard = () => {
     const handleCheckIn = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://hms-backend-production-9545.up.railway.app/security/visitors/checkin', checkInForm);
+            await axios.post('getApiUrl(' / security / visitors / checkin', checkInForm);
             setShowCheckInForm(false);
             setCheckInForm({
                 visitorName: '',
@@ -69,7 +70,7 @@ const SecurityDashboard = () => {
 
     const handleCheckOut = async (visitorId) => {
         try {
-            await axios.put(`https://hms-backend-production-9545.up.railway.app/security/visitors/${visitorId}/checkout`);
+            await axios.put(`getApiUrl('/security/visitors/${visitorId}/checkout`);
             fetchVisitors();
         } catch (error) {
             console.error('Error checking out visitor:', error);

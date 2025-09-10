@@ -86,12 +86,12 @@ const AdminStudents = () => {
     const updateFeeStatus = async (studentId, status) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`https://hms-backend-production-9545.up.railway.app/warden/students/${studentId}/fees`,
+            await axios.put(getApiUrl(`/warden/students/${studentId}/fees`),
                 { feeStatus: status },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             // Refresh students
-            const res = await axios.get('https://hms-backend-production-9545.up.railway.app/warden/students', {
+            const res = await axios.get(getApiUrl('/warden/students'), {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const studentData = res.data.students || [];
@@ -451,12 +451,12 @@ const AdminStudents = () => {
                             <button onClick={() => setShowAdd(false)} className="px-3 py-2 rounded border">Cancel</button>
                             <button onClick={async () => {
                                 try {
-                                    await axios.post('https://hms-backend-production-9545.up.railway.app/student/register', form);
+                                    await axios.post(getApiUrl('/student/register'), form);
                                     setShowAdd(false);
                                     setForm({ fullName: '', email: '', phone: '', password: '', studentId: '', course: '', year: 1, guardianName: '', guardianPhone: '', address: '', dateOfBirth: '', roomId: '', feeAmount: 0, feeStatus: 'pending' });
                                     // refresh
                                     const token = localStorage.getItem('token');
-                                    const res = await axios.get('https://hms-backend-production-9545.up.railway.app/warden/students', { headers: { Authorization: `Bearer ${token}` } });
+                                    const res = await axios.get(getApiUrl('/warden/students'), { headers: { Authorization: `Bearer ${token}` } });
                                     setStudents(res.data.students || []);
                                 } catch (e) { console.error('Add student failed', e?.response?.data || e.message) }
                             }} className="px-3 py-2 bg-blue-600 text-white rounded">Save</button>
